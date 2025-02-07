@@ -1,0 +1,78 @@
+==============================================================================
+*mstdn-imgview.txt*                 Image viewer through sixel for mstdn.vim.
+
+MSTDN-IMGVIEW.VIM                                           *mstdn-imgview.vim*
+
+Image viewer through sixel of |mstdn.vim|.
+This plugin provides a way to display images (attachments of a Mastodon post)
+directly in the terminal (if sixel-supported) or in a GUI terminal.
+
+------------------------------------------------------------------------------
+OVERVIEW                                               *mstdn-imgview-overview*
+
+mstdn-imgview.vim allows you to display images associated with Mastodon posts
+retrieved via |mstdn.vim|. It uses sixel to render images within your (GUI)
+terminal window.
+
+------------------------------------------------------------------------------
+REQUIREMENTS                                               *mstdn-imgview-req*
+
+- A terminal or environment capable of displaying sixel graphics (for example,
+  some terminals like XTerm with sixel support, or Wezterm, etc.).
+- |mstdn.vim| as the backend plugin that communicates with Mastodon.
+- denops-sixel-view.vim as the sixel backend plugin.
+  https://github.com/gw31415/denops-sixel-view.vim
+
+------------------------------------------------------------------------------
+USAGE                                                    *mstdn-imgview-usage*
+
+1. Navigate to a timeline or a buffer handled by |mstdn.vim|.
+2. Move your cursor over a post that has attachments (images).
+3. Call the view function with a parameter specifying which image index you want
+   to display. For example:
+   >
+       :call mstdn#imgview#view(+1)
+   <
+
+4. When multiple images are present in one post, you can call the same function
+   with the next index (e.g., `+2`, `+3`, etc.) to cycle through them.  
+
+5. Use |mstdn#imgview#clear()| to clear the displayed image.
+
+------------------------------------------------------------------------------
+FUNCTIONS                                             *mstdn-imgview-api*
+
+mstdn#imgview#view({next})                            *mstdn#imgview#view()*
+        Display the image associated with the post under the cursor. The
+        argument {next} indicates the index relative to the currently displayed
+        image. For example, `+1` means "show the next image," and `+2` means
+        "show two images ahead," etc.
+        If no image is currently displayed, or if this is the first call, it
+        starts from the first attachment.
+
+mstdn#imgview#clear()                                *mstdn#imgview#clear()*
+        Clear the currently displayed image from the screen.
+
+------------------------------------------------------------------------------
+VARIABLES                                                 *mstdn-imgview-vars*
+
+*g:mstdn_imgview_fontheight*
+        The font size (height) in your GUI terminal environment. If not found,
+        the default value is 14. It tries to get from `guifont`.
+
+*g:mstdn_imgview_fontwidth*
+        The font size (width). The default value is `g:mstdn_imgview_fontheight / 2`.
+
+*g:mstdn_imgview_retinascale*
+        The ratio of the screen's logical pixel size to the actual pixel size.
+        The plugin tries to detect it automatically. If it fails, the default
+        value is 1.
+
+------------------------------------------------------------------------------
+RELATED PROJECTS                                      *mstdn-imgview-related*
+
+- |mstdn.vim|: The required backend plugin that provides Mastodon API access.
+  https://github.com/gw31415/mstdn.vim
+
+------------------------------------------------------------------------------
+vim:tw=80:ts=8:ft=help:norl:
