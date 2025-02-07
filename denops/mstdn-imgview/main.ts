@@ -20,7 +20,7 @@ async function getRetinaScale(): Promise<number> {
 	return 1;
 }
 
-export async function main(denops: Denops): Promise<void> {
+export function main(denops: Denops) {
 	denops.dispatcher = {
 		getRetinaScale,
 	};
