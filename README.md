@@ -1,6 +1,6 @@
 # mstdn-imgview.vim
 
-Image viewer through sixel of [mstdn.vim](https://github.com/gw31415/mstdn.vim).
+Image viewer of [mstdn.vim](https://github.com/gw31415/mstdn.vim) through sixel.
 
 ## Requirements
 
